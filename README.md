@@ -10,12 +10,6 @@ Asymptotic P-value calculation involves fitting a suitable asymptotic model to t
 
 ## This is an example analysis of airway RNAseq gene expression data using mGSZm
 
-Install from the mGSZm package from source file provided in release/
-
-R CMD INSTALL mGSZm_1.1.tar.gz
-library(mGSZm)
-
-
 Load RNAseq gene expression data
 
 
@@ -51,9 +45,10 @@ filter <- apply(countdata, 1, function(x) length(x[x>5])>=2)
 countdata <- countdata[filter,]
 ```
 
-Install (attached source code) and load mGSZ
+Install from the mGSZm package from source code provided in release/
 
 ``` r
+R CMD INSTALL mGSZm_1.1.tar.gz
 library(mGSZm)
 ```
 
