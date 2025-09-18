@@ -1,7 +1,10 @@
 # GSZ
 Robust gene set analysis methods using Gene Set Z-score
 
+Install from the mGSZm package from source file provided in release/
 
+R CMD INSTALL mGSZm_1.1.tar.gz
+library(mGSZm)
 
 ## This is an example analysis of airway RNAseq gene expression data using mGSZm
 
@@ -9,8 +12,6 @@ Load RNAseq gene expression data
 
 
 ``` r
-# source("https://bioconductor.org/biocLite.R")
-# biocLite("airway")
 suppressWarnings(suppressMessages(library(airway)))
 data(airway)
 ```
