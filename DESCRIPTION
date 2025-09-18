@@ -1,0 +1,21 @@
+Package: mGSZm
+Title: Robust gene set analysis methods using Gene Set Z-score.
+Version: 1.0
+Authors@R: 
+	c(
+	person(given="Pashupati P.", 
+	family = "Mishra", 
+	email = "pashupati.mishra@tuni.fi", 
+	role = c("aut", "cre")),
+	person(given="Petri",
+	family="Törönen",
+	email: "petri.toronen@helsinki.fi",
+	role="aut")
+	)
+Description: Gene set analysis for gene expression data. Also applicable to data with fewer than 6 biological replicates
+Depends: R (>= 3.1.2)
+License: MIT
+LazyData: true
+Packaged: 2015-11-06 13:52:17 UTC; pashu
+Author: Pashupati Mishra [aut, cre]
+Maintainer: Pashupati Mishra <pashupati.mishra@tuni.fi>

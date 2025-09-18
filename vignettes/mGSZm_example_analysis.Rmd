@@ -1,0 +1,124 @@
+---
+title: "mGSZm example analysis"
+author: "Pashupati Mishra"
+date: "11/3/2017"
+output: md_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## This is an example analysis of airway RNAseq gene expression data using mGSZm
+
+Load RNAseq gene expression data
+
+```{r}
+# source("https://bioconductor.org/biocLite.R")
+# biocLite("airway")
+suppressWarnings(suppressMessages(library(airway)))
+data(airway)
+```
+
+Count data
+
+```{r}
+countdata <- assay(airway)
+```
+
+Metadata
+```{r}
+coldata <- colData(airway)
+```
+
+Sample labels
+```{r}
+sample.labels <- coldata$dex
+```
+
+Filter out non-expressed genes (criteria - must have more than 5 reads in at least two samples for each gene)
+
+```{r}
+filter <- apply(countdata, 1, function(x) length(x[x>5])>=2)
+countdata <- countdata[filter,]
+```
+
+Install (attached source code) and load mGSZ
+```{r}
+library(mGSZm)
+```
+
+Load example gene set data (attached) and take a subset of it to make runs faster
+
+```{r}
+load("airway.gene.sets.RData")
+gene.sets <- gene.sets.airway.go[1:50]
+```
+
+Create mGSZm object
+```{r}
+# exprdat:  raw count data
+# genesets: gene set data (list or binary matrix)
+# sampleLabels: sample labels (example, c("treatment","treatment","treatment","control","control","control"))
+gsz_obj <- GSZ(exprdat=countdata,genesets=gene.sets,sampleLabels=sample.labels)
+```
+
+Run mGSZm (we have only two treatments/groups)
+```{r}
+# rnaseq: logical. TRUE for RNAseq data
+# perm.number: number of permutations for P-value estimation
+res1 <- mGSZm(gsz_obj,rnaseq=TRUE,perm.number=10)
+```
+
+
+Table with results
+```{r}
+# n : number of most significant genes sets
+# order.by: criteria for ordering the table (P-value, FDR)
+top <- topResults(res1,n=10,order.by = "FDR")
+top
+```
+
+In order to make an example run with multi-group (> 2 groups) data, lets create multi-group (>2 groups) gene expression data by modifying the sample labels as follows,
+
+```{r}
+sample.labels.multi <- c("treatment1","treatment1","treatment2","treatment2","treatment2","control","control","control")
+```
+
+Update the sample.labels of gsz_obj
+
+```{r}
+sampleLabels(gsz_obj) <- sample.labels.multi
+```
+
+Run mGSZm for following comparisons: group1-group2 and group1-group2
+
+```{r}
+comparisons <- c("treatment1-control","treatment2-control")
+res1 <- mGSZm(gsz_obj,rnaseq=TRUE,comparison=comparisons,perm.number=10)
+```
+
+Table with top 10 gene sets
+
+```{r}
+# direction: up regulated, down regulated or mixed. 
+# In Control vs Treatment setting, up represents that a geneset is upregulated in Treatment. The program orders the groups and the first group is used as reference.
+
+# comparison: comparison of interest
+top_results <- topResults(res1,comparison=comparisons[1], order.by="FDR",direction="up",n=10)
+top_results
+```
+
+```{r}
+# generate result table with all comparisons
+top_results1 <- topResults(res1,comparison=comparisons, order.by="FDR",direction="up",n=10)
+top_results1
+```
+
+Generate result table with all the analyzed gene sets without any ordering
+
+```{r}
+all_results <- topResults(res1,comparison=comparisons, order.by="none",n=Inf)
+head(all_results)
+```
+
