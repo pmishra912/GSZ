@@ -1,5 +1,5 @@
-# GSZ
-Robust gene set analysis methods using Gene Set Z-score
+# mGSZm
+Robust gene set analysis method using Gene Set Z-score and advanced permutation method
 
 
 
