@@ -1,6 +1,8 @@
 # mGSZm
 Robust gene set analysis method using Gene Set Z-score and advanced permutation method
 
+# Description
+Permutation methods are popular in gene set analysis for assigning P-value to gene set scores due to its ability to give reliable statistical inference without making strong distributional assumptions. Most of the gene set analysis methods are based on conventional permutation method that permutes only the sample groups that are being compared and ignores the other sample groups in the dataset. Thus, the conventional permutation method is not applicable to datasets with few biological replicates (less than six) as the number of unique permutations is too few to estimate P-values accurately. We have developed advanced permutation method for multi-group gene expression data with less than six replicates per group. We have shown that the advanced permutation method performs clearly better than the conventional permutation method. [Click here to read the article (https://doi.org/10.1186/s12859-016-1403-0)]
 
 
 ## This is an example analysis of airway RNAseq gene expression data using mGSZm
