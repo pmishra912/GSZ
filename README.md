@@ -1,6 +1,6 @@
 # mGSZm
 Robust gene set analysis method using Gene Set Z-score, advanced permutation method and asymptotic p-value estimation.
-
+For details on other methods based on Gene Set Z-score, please visit http://ekhidna.biocenter.helsinki.fi/downloads/pashupati/index.html
 
 
 # Description
