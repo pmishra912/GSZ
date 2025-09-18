@@ -2,14 +2,6 @@
 Robust gene set analysis methods using Gene Set Z-score
 
 
----
-title: "mGSZm example analysis"
-author: "Pashupati Mishra"
-date: "11/3/2017"
-output: html_document
----
-
-
 
 ## This is an example analysis of airway RNAseq gene expression data using mGSZm
 
